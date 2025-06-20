@@ -40,17 +40,19 @@ const Hero = () => {
         <a href="#contact" className="cta-button">Get in Touch</a>
       </div>
 
-      <div className="news-ticker">
-        <div className="ticker-content">
-          <span>Orange Army Meetup this Sunday at Uppal Stadium</span>
-          <span>Join us for the ultimate Sunrisers fan parade</span>
-          <span>Free merchandise giveaway for early attendees</span>
-          <span>Follow us on Instagram for real-time updates</span>
-          <span>We bleed Orange. Go Sunrisers Hyderabad!</span>
-        </div>
-      </div>
+
+
 
       <Clients />
+      <div className="news-ticker">
+  <div className="ticker-content">
+    <span>Orange Army Meetup this Sunday at Uppal Stadium</span>
+    <span>Join us for the ultimate Sunrisers fan parade</span>
+    <span>Free merchandise giveaway for early attendees</span>
+    <span>Follow us on Instagram for real-time updates</span>
+    <span>We bleed Orange. Go Sunrisers Hyderabad!</span>
+  </div>
+</div>
     
       <BrandingCards />
         
