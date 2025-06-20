@@ -12,7 +12,7 @@ const SocialMedia = () => {
       <div className="social-grid">
         {/* Instagram */}
         <a
-          href="https://www.instagram.com"
+          href="https://www.instagram.com/orangearmyforever/?hl=en"
           className="social-card instagram"
           target="_blank"
           rel="noopener noreferrer"
@@ -37,7 +37,7 @@ const SocialMedia = () => {
 
         {/* YouTube */}
         <a
-          href="https://www.youtube.com"
+          href="https://www.youtube.com/@OrangeArmyInsiderlive"
           className="social-card youtube"
           target="_blank"
           rel="noopener noreferrer"

@@ -6,31 +6,33 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleLinkClick = () => {
-    setMenuOpen(false); // Close menu on link click
+    setMenuOpen(false);
   };
 
   return (
     <nav className="navbar">
-      <div className="navbar-logo">
-        <Link to="/" onClick={handleLinkClick}>Orange Army</Link>
-      </div>
+      <div className="navbar-container">
+        <div className="navbar-logo">
+          <Link to="/" onClick={handleLinkClick}>𝓞range 𝘼rmy </Link>
+        </div>
 
-      <div
-        className={`navbar-toggle ${menuOpen ? "open" : ""}`}
-        onClick={() => setMenuOpen(!menuOpen)}
-      >
-        <span className="bar" />
-        <span className="bar" />
-        <span className="bar" />
-      </div>
+        <div
+          className={`hamburger ${menuOpen ? "open" : ""}`}
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          <span />
+          <span />
+          <span />
+        </div>
 
-      <ul className={`navbar-links ${menuOpen ? "active" : ""}`}>
-        <li><Link to="/about" onClick={handleLinkClick}>About</Link></li>
-        <li><Link to="/services" onClick={handleLinkClick}>What We Do</Link></li>
-        <li><Link to="/works" onClick={handleLinkClick}>Gallery</Link></li>
-        <li><Link to="/blog" onClick={handleLinkClick}>Blog</Link></li>
-        <li><Link to="/contact" onClick={handleLinkClick}>Join Us</Link></li>
-      </ul>
+        <ul className={`navbar-links ${menuOpen ? "active" : ""}`}>
+          <li><Link to="/about" onClick={handleLinkClick}>About</Link></li>
+          <li><Link to="/services" onClick={handleLinkClick}>What We Do</Link></li>
+          <li><Link to="/works" onClick={handleLinkClick}>Gallery</Link></li>
+          <li><Link to="/blog" onClick={handleLinkClick}>Blog</Link></li>
+          <li><Link to="/contact" onClick={handleLinkClick}>Join Us</Link></li>
+        </ul>
+      </div>
     </nav>
   );
 };

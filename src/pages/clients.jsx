@@ -2,14 +2,14 @@ import React from "react";
 import "./styles/clients.css";
 
 const clientsData = [
-  { name: "Red Bull" },
-  { name: "Nike" },
-  { name: "Sony" },
-  { name: "Paytm" },
-  { name: "Jio" },
-  { name: "Pepsi" },
-  { name: "Puma" },
-  { name: "Adidas" },
+  { name: "OAF - 1" },
+  { name: "OAF - 2" },
+  { name: "OAF - 3" },
+  { name: "OAF - 4" },
+  { name: "OAF - 5" },
+  { name: "OAF - 6" },
+  { name: "OAF - 7" },
+  { name: "OAF - 8" },
 ];
 
 const Clients = () => {
