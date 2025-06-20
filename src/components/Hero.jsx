@@ -6,6 +6,7 @@ import Contact from "../pages/Contact";
 import BrandingCards from "./sections/BrandingCards";
 import Services from "./sections/Services";
 import Testimonals from "./sections/Testimonals";
+import SocialMedia from "./sections/SocialMedia";
 const Hero = () => {
   return (
     <section className="hero-section">
@@ -18,10 +19,10 @@ const Hero = () => {
             Join the heartbeat of Hyderabad cricket. The Orange Army is more than a fan base—
             it's a community driven by passion, pride, and unwavering support for Sunrisers Hyderabad.
           </p>
-          <p className="hero-description">
+          {/* <p className="hero-description">
             Get involved in match-day chants, exclusive events, fan meetups, and giveaways.
             This is the spirit of SRH—bold, united, and unstoppable.
-          </p>
+          </p> */}
         </div>
 
         <div className="hero-right">
@@ -59,6 +60,7 @@ const Hero = () => {
         <Services />
         <Testimonals />
         <Contact />
+        <SocialMedia />
         
 
     </section>

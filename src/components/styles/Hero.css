@@ -83,39 +83,51 @@
   max-width: 80%;
   height: auto;
 }
-
 /* Call to Action */
 .call-to-action {
-  background: linear-gradient(to bottom, #000000, #000000);
-  padding: 60px 20px;
+  background: linear-gradient(to bottom, #0d0d0d, #1a1a1a);
+  padding: 70px 20px;
   text-align: center;
   color: white;
+  font-family: 'Exo 2', sans-serif;
+  position: relative;
+  overflow: hidden;
+  border-top: 2px solid #ff6f00;
+  border-bottom: 2px solid #ff6f00;
 }
 
 .call-to-action h2 {
-  font-size: 2.2rem;
+  font-size: 2.5rem;
   line-height: 1.6;
   max-width: 800px;
-  margin: 0 auto 30px auto;
-  font-weight: 600;
-  color: #fff7e6;
+  margin: 0 auto 40px auto;
+  font-weight: 700;
+  color: #ffe8c1;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 .cta-button {
-  background: #3a1c08;
-  color: #ffcc80;
-  font-weight: bold;
-  padding: 15px 30px;
-  border-radius: 10px;
+  background: linear-gradient(to right, #ff8f00, #ff6f00);
+  color: #fff;
+  font-weight: 600;
+  padding: 16px 36px;
+  border-radius: 12px;
   text-decoration: none;
-  font-size: 1.15rem;
-  transition: background 0.3s ease, transform 0.3s ease;
+  font-size: 1.2rem;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 6px 14px rgba(255, 111, 0, 0.3);
+  font-family: 'Barlow Condensed', sans-serif;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
 .cta-button:hover {
-  background: #5b2c0d;
-  transform: scale(1.05);
-  color: #ffd54f;
+  background: linear-gradient(to right, #ffa726, #fb8c00);
+  transform: translateY(-3px) scale(1.05);
+  color: #fffbea;
+  box-shadow: 0 8px 20px rgba(255, 128, 0, 0.5);
 }
 
 /* News Ticker */

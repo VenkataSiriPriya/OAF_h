@@ -1,5 +1,5 @@
 .clients {
-  padding: 60px 20px;
+  padding: 60px 40px;
   background-color: #000000ff;
   text-align: center;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -8,19 +8,20 @@
 .clients h2 {
   font-size: 2rem;
   margin-bottom: 10px;
-  color: #111;
+  color: #fefefeff;
 }
 
 .clients p {
   font-size: 1rem;
-  margin-bottom: 40px;
-  color: #444;
+  margin-top: 52px;
+  margin-bottom: 50px;
+  color: #ffeeeee6;
 }
 
 .clients-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 30px;
+  gap: 3px;
   align-items: center;
   justify-items: center;
 }
@@ -31,15 +32,21 @@
 }
 
 .client-card img {
-  width: 100px;
+  width: 160px; /* Increased from 100px to 160px */
   height: auto;
   object-fit: contain;
   display: block;
-  margin: 0 auto 10px;
+  margin: 0 auto 20px;
+  transition: transform 0.3s ease; /* Optional: smooth scaling on hover */
 }
+
+/* .client-card img:hover {
+  transform: scale(1.05); Optional: subtle hover effect
+} */
+
 
 .client-card h4 {
   font-size: 0.95rem;
-  color: #222;
+  color: #fefefeff;
   margin: 0;
 }

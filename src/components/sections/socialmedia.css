@@ -1,0 +1,118 @@
+.social-media {
+  background: linear-gradient(to bottom, #fff4e0, #ffead0);
+  color: #111;
+  padding: 100px 20px;
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Headings */
+.social-title {
+  font-size: 2.8rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  letter-spacing: 2px;
+}
+
+.social-subtitle {
+  font-size: 1.2rem;
+  color: #444;
+  max-width: 700px;
+  margin: 0 auto 60px;
+  line-height: 1.6;
+}
+
+/* Grid Layout */
+.social-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 32px;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+/* Card Layout */
+.social-card {
+  background: white;
+  border-radius: 18px;
+  padding: 24px 20px;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid #f3e5d8;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+}
+
+.social-card img {
+  width: 56px;
+  height: 56px;
+  margin-bottom: 18px;
+  border-radius: 12px;
+  object-fit: contain;
+  background-color: #fff;
+  padding: 6px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Text Block */
+.social-content {
+  text-align: center;
+}
+
+.social-content h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #111;
+}
+
+.social-content p {
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Platform-specific accents */
+.instagram {
+  border-left: 5px solid #d63384;
+}
+
+.youtube {
+  border-left: 5px solid #e60000;
+}
+
+.facebook {
+  border-left: 5px solid #1877f2;
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+  .social-title {
+    font-size: 2.2rem;
+  }
+
+  .social-subtitle {
+    font-size: 1rem;
+    margin-bottom: 40px;
+  }
+
+  .social-card {
+    padding: 20px 16px;
+  }
+
+  .social-card img {
+    width: 48px;
+    height: 48px;
+  }
+
+  .social-content h3 {
+    font-size: 1rem;
+  }
+
+  .social-content p {
+    font-size: 0.9rem;
+  }
+}
