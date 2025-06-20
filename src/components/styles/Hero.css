@@ -1,6 +1,6 @@
 .hero-section {
   position: relative;
-  background: linear-gradient(to bottom, #732e17, #ff6a00, #ffd580);
+  background: linear-gradient(to bottom, #ff8000, #000000);
   color: white;
   padding-top: 40px;
   overflow: hidden;
@@ -86,7 +86,7 @@
 
 /* Call to Action */
 .call-to-action {
-  background: linear-gradient(to bottom, #ff6a00, #ff9500);
+  background: linear-gradient(to bottom, #000000, #000000);
   padding: 60px 20px;
   text-align: center;
   color: white;

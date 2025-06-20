@@ -1,0 +1,54 @@
+.branding-section {
+  background: linear-gradient(to bottom, #ff6a00, #ffb347, #fff3e0);
+  padding: 80px 20px;
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.branding-heading {
+  font-size: 2.8rem;
+  margin-bottom: 40px;
+  color: #fff8f0;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+}
+
+.branding-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.branding-card {
+  background: linear-gradient(145deg, #ffe0b3, #ffc285);
+  padding: 30px 20px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(255, 102, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 2px solid #ff9c47;
+}
+
+.branding-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 35px rgba(255, 122, 0, 0.4);
+}
+
+.branding-icon {
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+.branding-title {
+  font-size: 1.4rem;
+  color: #662200;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.branding-description {
+  font-size: 1rem;
+  color: #4b2e1a;
+  line-height: 1.6;
+}

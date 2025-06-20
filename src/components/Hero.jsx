@@ -3,7 +3,9 @@ import React from "react";
 import "./styles/Hero.css";
 import Clients from "../pages/clients";
 import Contact from "../pages/Contact";
-
+import BrandingCards from "./sections/BrandingCards";
+import Services from "./sections/Services";
+import Testimonals from "./sections/Testimonals";
 const Hero = () => {
   return (
     <section className="hero-section">
@@ -49,7 +51,14 @@ const Hero = () => {
       </div>
 
       <Clients />
-      <Contact />
+    
+      <BrandingCards />
+        
+        <Services />
+        <Testimonals />
+        <Contact />
+        
+
     </section>
   );
 };
