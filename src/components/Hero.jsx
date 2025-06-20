@@ -1,6 +1,6 @@
 // src/components/Hero.jsx
 import React from "react";
-import "./styles/hero.css";
+import "./styles/Hero.css";
 import Clients from "../pages/clients";
 import Contact from "../pages/Contact";
 
