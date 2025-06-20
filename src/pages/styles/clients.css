@@ -1,58 +1,45 @@
-/* clients.css */
-
 .clients {
-  padding: 4rem 2rem;
-  background: linear-gradient(to bottom, #000000, #141414);
-  color: white;
+  padding: 60px 20px;
+  background-color: #ffffff;
   text-align: center;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .clients h2 {
-  font-size: 2.5rem;
-  color: orange;
-  margin-bottom: 1rem;
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #111;
 }
 
 .clients p {
-  font-size: 1.1rem;
-  color: #ccc;
-  margin-bottom: 2.5rem;
+  font-size: 1rem;
+  margin-bottom: 40px;
+  color: #444;
 }
 
 .clients-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 2rem;
-  max-width: 1000px;
-  margin: 0 auto;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 30px;
+  align-items: center;
   justify-items: center;
 }
 
 .client-card {
-  background-color: #1f1f1f;
-  padding: 1.5rem;
-  border-radius: 12px;
   text-align: center;
-  box-shadow: 0 6px 18px rgba(255, 165, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.client-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(255, 165, 0, 0.25);
+  padding: 10px 0;
 }
 
 .client-card img {
-  width: 80px;
+  width: 100px;
   height: auto;
   object-fit: contain;
-  margin-bottom: 0.8rem;
-  filter: brightness(0) invert(1); /* Makes logos white for dark theme (optional) */
+  display: block;
+  margin: 0 auto 10px;
 }
 
 .client-card h4 {
-  font-size: 1rem;
-  color: white;
-  margin-top: 0;
+  font-size: 0.95rem;
+  color: #222;
+  margin: 0;
 }

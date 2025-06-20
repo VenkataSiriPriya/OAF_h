@@ -1,90 +1,130 @@
-/* src/components/styles/hero.css */
-
 .hero-section {
   position: relative;
-  background: linear-gradient(to bottom, #000000, #f72a2a);
+  background: linear-gradient(to bottom, #732e17, #ff6a00, #ffd580);
   color: white;
-  padding-top: 80px;
+  padding-top: 40px;
   overflow: hidden;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-
-
-.hero-content {
-  text-align: center;
+.hero-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 40px 20px;
 }
 
+.hero-left {
+  flex: 1;
+  min-width: 300px;
+}
+
+.hero-right {
+  flex: 1;
+  min-width: 280px;
+  text-align: center;
+}
+
 .srh-logo {
-  width: 120px;
-  margin-bottom: 20px;
+  width: 200px;
+  padding: 16px 0;
+  margin-bottom: 24px;
+  animation: bounce 1.8s ease-in-out infinite;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-15px); }
+  60% { transform: translateY(-8px); }
 }
 
 .hero-title {
-  font-size: 6rem;
-  font-weight: 900;
-  color: #ffa500;
-  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+  font-size: 5.5rem;
+  font-weight: 500;
+  text-align: center;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+  transition: transform 0.3s ease, text-shadow 0.3s ease;
+}
+
+.hero-title:hover {
+  transform: scale(1.02);
+  text-shadow:
+    3px 3px 10px rgba(0, 0, 0, 0.7),
+    6px 6px 20px rgba(255, 153, 0, 0.3);
 }
 
 .hero-tagline {
-  font-size: 1.5rem;
-  color: #fff8dc;
-  margin-bottom: 15px;
+  font-size: 2rem;
+  color: #fce2bd;
+  margin-bottom: 24px;
+  text-align: center;
+  font-weight: 300;
 }
 
 .hero-description {
-  font-size: 1.1rem;
-  color: #ffd9a0;
+  font-size: 1.2rem;
+  color: #ffe5c1;
   max-width: 700px;
   margin: 12px auto;
-  line-height: 1.6;
+  line-height: 1.7;
+  font-weight: 400;
+  text-align: center;
 }
 
+.shout-img {
+  max-width: 80%;
+  height: auto;
+}
+
+/* Call to Action */
 .call-to-action {
-  background: #f72a2a;
+  background: linear-gradient(to bottom, #ff6a00, #ff9500);
   padding: 60px 20px;
   text-align: center;
   color: white;
-  box-shadow: inset 0 10px 30px rgba(0, 0, 0, 0.3);
-  z-index: 3;
-  position: relative;
 }
 
 .call-to-action h2 {
-  font-size: 2rem;
-  font-weight: 600;
+  font-size: 2.2rem;
+  line-height: 1.6;
   max-width: 800px;
   margin: 0 auto 30px auto;
-  line-height: 1.5;
+  font-weight: 600;
+  color: #fff7e6;
 }
 
 .cta-button {
-  background: black;
-  color: white;
+  background: #3a1c08;
+  color: #ffcc80;
   font-weight: bold;
   padding: 15px 30px;
-  border-radius: 8px;
+  border-radius: 10px;
   text-decoration: none;
-  font-size: 1.1rem;
-  transition: background 0.3s ease;
+  font-size: 1.15rem;
+  transition: background 0.3s ease, transform 0.3s ease;
 }
 
 .cta-button:hover {
-  background: #222;
+  background: #5b2c0d;
+  transform: scale(1.05);
+  color: #ffd54f;
 }
 
-/* ----------------------------- */
-/* Stylish News Ticker Section  */
-/* ----------------------------- */
-
+/* News Ticker */
 .news-ticker {
   width: 100%;
   overflow: hidden;
-  background: linear-gradient(to right, #111, #000);
-  border-top: 3px solid #ffa500;
-  border-bottom: 3px solid #ffa500;
+  background: linear-gradient(to right, #2c1b0f, #3a1c08);
+  border-top: 3px solid #ff6a00;
+  border-bottom: 3px solid #ff6a00;
   padding: 12px 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   position: relative;
@@ -97,7 +137,7 @@
   animation: scrollTicker 25s linear infinite;
   font-size: 1rem;
   font-weight: 600;
-  color: #ffa500;
+  color: #ffc04d;
   letter-spacing: 0.5px;
 }
 
@@ -105,7 +145,7 @@
   display: inline-block;
   margin-right: 80px;
   padding-left: 10px;
-  border-left: 1px solid #ffa500;
+  border-left: 1px solid #ffc04d;
 }
 
 .ticker-content span:first-child {
@@ -113,20 +153,32 @@
 }
 
 @keyframes scrollTicker {
-  0% {
-    transform: translateX(100%);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
 }
 
-
+/* Responsive */
 @media (max-width: 768px) {
+  .hero-main {
+    flex-direction: column;
+    padding: 20px 10px;
+  }
+
   .hero-title {
     font-size: 4rem;
   }
-  .hero-description, .call-to-action h2, .ticker-content {
+
+  .hero-tagline {
+    font-size: 1.3rem;
+  }
+
+  .srh-logo {
+    width: 140px;
+  }
+
+  .hero-description,
+  .call-to-action h2,
+  .ticker-content {
     font-size: 0.95rem;
   }
 }
