@@ -68,7 +68,7 @@ const Hero = () => {
         <Services />
         <Testimonals />
         <Contact />
-        <SocialMedia />
+        {/* <SocialMedia /> */}
         <ContactSEC />
       </section>
     </>
