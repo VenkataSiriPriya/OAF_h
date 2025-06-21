@@ -1,9 +1,12 @@
 import React from "react";
 import "./styles/Contact.css";
 import Contact from "../components/sections/Contact";
+import Testimonals from "../components/sections/Testimonals";
+import SocialMedia from "../components/sections/SocialMedia";
 
 const MissionSection = () => {
   return (
+    <>
     <section className="mission-section">
       <div className="mission-container">
         <div className="mission-image">
@@ -21,6 +24,18 @@ const MissionSection = () => {
         </div>
       </div>
     </section>
+            <div className="news-ticker">
+          <div className="ticker-content">
+            <span>Orange Army Meetup this Sunday at Uppal Stadium</span>
+            <span>Join us for the ultimate Sunrisers fan parade</span>
+            <span>Free merchandise giveaway for early attendees</span>
+            <span>Follow us on Instagram for real-time updates</span>
+            <span>We bleed Orange. Go Sunrisers Hyderabad!</span>
+          </div>
+        </div>
+    <Testimonals />
+    <SocialMedia/>
+    </>
   );
 };
 

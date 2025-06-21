@@ -1,0 +1,114 @@
+.about-page {
+  background: linear-gradient(to bottom, #0d0d0d, #1a0600);
+  color: #f0f0f0;
+  padding: 60px 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.about-hero {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.about-hero h1 {
+  font-size: 2.8rem;
+  color: #ffa500;
+  margin-top: 50px;
+  margin-bottom: 12px;
+  text-shadow: 1px 1px 3px #000;
+}
+
+.about-hero p {
+  font-size: 1.2rem;
+  color: #ffcc99;
+  font-style: italic;
+}
+
+.about-section {
+  max-width: 1000px;
+  margin: 0 auto 60px;
+  text-align: center;
+}
+
+.about-section h2 {
+  font-size: 2rem;
+  color: #ff7b00;
+  margin-bottom: 20px;
+}
+
+.about-section p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #ddd;
+  padding: 0 10px;
+}
+
+/* Cards */
+.about-cards {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+.about-card {
+  background-color: #1e1e1e;
+  border: 1px solid rgba(255, 123, 0, 0.3);
+  border-radius: 12px;
+  padding: 24px 20px;
+  width: 280px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(255, 102, 0, 0.2);
+}
+
+.about-card h3 {
+  color: #ffa133;
+  margin-bottom: 12px;
+}
+
+.about-card p {
+  font-size: 0.95rem;
+  color: #ccc;
+}
+
+/* CTA Join Section */
+.join p {
+  max-width: 700px;
+  margin: 0 auto 20px;
+}
+
+.join-btn {
+  background-color: #ff6600;
+  color: #fff;
+  border: none;
+  padding: 12px 28px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.join-btn:hover {
+  background-color: #e65300;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .about-hero h1 {
+    font-size: 2rem;
+  }
+
+  .about-section h2 {
+    font-size: 1.5rem;
+  }
+
+  .about-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .about-card {
+    width: 90%;
+  }
+}

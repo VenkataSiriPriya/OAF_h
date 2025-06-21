@@ -148,7 +148,7 @@
 .ticker-content {
   display: inline-block;
   white-space: nowrap;
-  animation: scrollTicker 25s linear infinite;
+  animation: scrollTicker 22s linear infinite;
   font-size: 1.6rem;
   font-weight: 600;
   color: #ffffffff;

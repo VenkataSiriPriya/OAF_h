@@ -16,6 +16,7 @@ import Works from "./pages/Works";
 import Clients from "./pages/clients";
 import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
+import WhatWedo from "./pages/WhatWedo";
 
 
 const App = () => {
@@ -33,6 +34,7 @@ const App = () => {
           <Route path="/clients" element={<Clients />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/WhatWedo" element={<WhatWedo />} />
         </Routes>
       </main>
 

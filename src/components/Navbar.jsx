@@ -13,7 +13,7 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="navbar-container">
         <div className="navbar-logo">
-          <Link to="/" onClick={handleLinkClick}>𝓞range 𝘼rmy </Link>
+          <Link to="/" onClick={handleLinkClick}>orange 𝘼rmy </Link>
         </div>
 
         <div
@@ -27,7 +27,7 @@ const Navbar = () => {
 
         <ul className={`navbar-links ${menuOpen ? "active" : ""}`}>
           <li><Link to="/about" onClick={handleLinkClick}>About</Link></li>
-          <li><Link to="/services" onClick={handleLinkClick}>What We Do</Link></li>
+          <li><Link to="/WhatWedo" onClick={handleLinkClick}>What We Do</Link></li>
           <li><Link to="/works" onClick={handleLinkClick}>Gallery</Link></li>
           <li><Link to="/blog" onClick={handleLinkClick}>Blog</Link></li>
           <li><Link to="/contact" onClick={handleLinkClick}>Join Us</Link></li>

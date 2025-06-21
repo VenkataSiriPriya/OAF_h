@@ -1,0 +1,65 @@
+.whatwedo-section {
+  background: linear-gradient(to bottom, #0a0a0a, #1a0600);
+  color: #f3f3f3;
+  padding: 80px 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.whatwedo-container {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.whatwedo-title {
+  font-size: 2.8rem;
+  color: #ffa500;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.whatwedo-intro {
+  font-size: 1.2rem;
+  color: #ffcc99;
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.whatwedo-block {
+  margin-bottom: 40px;
+}
+
+.whatwedo-block h2 {
+  font-size: 1.6rem;
+  color: #ff7b00;
+  margin-bottom: 12px;
+}
+
+.whatwedo-block p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: #dddddd;
+}
+
+/* Emphasized section */
+.highlight {
+  border-top: 1px solid rgba(255, 123, 0, 0.4);
+  padding-top: 30px;
+  margin-top: 50px;
+  text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+  .whatwedo-title {
+    font-size: 2rem;
+  }
+
+  .whatwedo-block h2 {
+    font-size: 1.3rem;
+  }
+
+  .whatwedo-block p {
+    font-size: 1rem;
+  }
+}
