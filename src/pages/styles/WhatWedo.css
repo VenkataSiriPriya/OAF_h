@@ -1,65 +1,45 @@
-.whatwedo-section {
-  background: linear-gradient(to bottom, #0a0a0a, #1a0600);
-  color: #f3f3f3;
-  padding: 80px 20px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.whatwedo-wrapper {
+  font-family: 'Segoe UI', sans-serif;
+  padding: 2rem;
+  background-color: #0f0f0f;
+  color: #f5f5f5;
 }
 
-.whatwedo-container {
-  max-width: 900px;
-  margin: 0 auto;
-  text-align: left;
-}
-
-.whatwedo-title {
-  font-size: 2.8rem;
-  color: #ffa500;
-  margin-top: 30px;
-  margin-bottom: 20px;
+.wwd-hero {
   text-align: center;
+  background: linear-gradient(to right, #ff6a00, #ffb347);
+  color: #1a1a1a;
+  padding: 3rem 1rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
 }
 
-.whatwedo-intro {
+.wwd-hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.wwd-hero p {
   font-size: 1.2rem;
-  color: #ffcc99;
-  margin-bottom: 50px;
-  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
 }
 
-.whatwedo-block {
-  margin-bottom: 40px;
+.wwd-section {
+  margin-bottom: 2rem;
+  background-color: #1a1a1a;
+  padding: 2rem;
+  border-left: 5px solid #ff6a00;
+  border-radius: 8px;
 }
 
-.whatwedo-block h2 {
-  font-size: 1.6rem;
-  color: #ff7b00;
-  margin-bottom: 12px;
+.wwd-section h2 {
+  color: #ffb347;
+  font-size: 1.8rem;
+  margin-bottom: 0.8rem;
 }
 
-.whatwedo-block p {
-  font-size: 1.05rem;
-  line-height: 1.8;
-  color: #dddddd;
-}
-
-/* Emphasized section */
-.highlight {
-  border-top: 1px solid rgba(255, 123, 0, 0.4);
-  padding-top: 30px;
-  margin-top: 50px;
-  text-align: center;
-}
-
-@media screen and (max-width: 768px) {
-  .whatwedo-title {
-    font-size: 2rem;
-  }
-
-  .whatwedo-block h2 {
-    font-size: 1.3rem;
-  }
-
-  .whatwedo-block p {
-    font-size: 1rem;
-  }
+.wwd-section p {
+  font-size: 1rem;
+  line-height: 1.6;
 }

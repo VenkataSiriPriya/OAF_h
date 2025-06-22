@@ -17,6 +17,7 @@ import Clients from "./pages/clients";
 import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
 import WhatWedo from "./pages/WhatWedo";
+import Quiz from "./pages/Quiz";
 
 
 const App = () => {
@@ -35,6 +36,9 @@ const App = () => {
           <Route path="/blog" element={<Blog />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/WhatWedo" element={<WhatWedo />} />
+          <Route path="/quiz" element={<Quiz />} />
+          {/* Auth Routes */}
+          {/* <Route path="/login" element={<Login />} />*/}
         </Routes>
       </main>
 

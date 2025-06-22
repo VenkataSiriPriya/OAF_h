@@ -12,9 +12,9 @@ body {
 /* Navbar Container */
 .navbar {
   background: linear-gradient(to right, #1a1a1a, #ff5100); /* Rich dark-orange SRH theme */
-  padding: 16px 5vw;
+  padding: 10px 5vw;
   width: 100%;
-  position: fixed;
+  position: fixed;  
   top: 0;
   left: 0;
   z-index: 999;

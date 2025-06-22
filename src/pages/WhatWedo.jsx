@@ -1,61 +1,58 @@
-import React from "react";
-import "./styles/WhatWedo.css";
+import React, { useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import './styles/WhatWedo.css';
 
-const WhatWedo = () => {
+export default function WhatWedo() {
+  useEffect(() => {
+    AOS.init({ duration: 1000, once: true });
+  }, []);
+
   return (
-    <section className="whatwedo-section">
-      <div className="whatwedo-container">
-        <h1 className="whatwedo-title">What We Do</h1>
-        <p className="whatwedo-intro">
-          At Orange Army, we don't just support — we amplify. We’re a collective of creators,
-          strategists, and superfans who transform passion into unforgettable digital energy.
-        </p>
+    <section className="whatwedo-wrapper">
 
-        <div className="whatwedo-block">
-          <h2>Creative Content</h2>
+      {/* Section 1: Introduction */}
+      <div className="wwd-hero" data-aos="fade-up">
+        <div className="wwd-hero-content">
+          <h1>What We Do</h1>
           <p>
-            Our strength lies in crafting moments that live beyond the match. Whether it’s a matchday countdown,
-            a nostalgic throwback, or a victory post that lights up the timeline — we turn emotion into visual language.
-            Through banners, match posters, quotes, and captions, we tell the story of SRH in our own voice.
-          </p>
-        </div>
-
-        <div className="whatwedo-block">
-          <h2>🎥 High-Energy Video Edits</h2>
-          <p>
-            We specialize in short-form video content: hype reels, match promos, cinematic edits, and fan tributes.
-            Every cut, transition, and drop of music is tuned to one mission — hype up the Orange Army.
-            Whether you're watching on Instagram, YouTube Shorts, or Twitter — you’ll feel the fire.
-          </p>
-        </div>
-
-        <div className="whatwedo-block">
-          <h2>🤝 Community Engagement</h2>
-          <p>
-            We don't just create content — we create conversations. Our memes, fan polls, trivia threads, and
-            real-time reactions keep the fanbase buzzing on and off season. We believe in celebrating our community
-            just as much as we celebrate cricket.
-          </p>
-        </div>
-
-        <div className="whatwedo-block">
-          <h2>📣 Brand & Creator Collaborations</h2>
-          <p>
-            We build bridges — with creators, influencers, and brands who want to engage the cricket world.
-            From fan jersey launches to campaign takeovers, we bring authentic cricket emotion to every collab.
-          </p>
-        </div>
-
-        <div className="whatwedo-block highlight">
-          <h2>🔥 Always Orange. Always On.</h2>
-          <p>
-            The Orange Army never sleeps. Win or lose, we stand loud, proud, and united. If you're looking for
-            a fan club that creates, connects, and celebrates — you're already one of us.
+            We are a passionate community of Sunrisers Hyderabad supporters, united by our love for cricket and our dedication to the Orange Army. From cheering in the stands to celebrating online, we turn every match into a celebration of energy, unity, and pride.
           </p>
         </div>
       </div>
+
+      {/* Section 2: Matchday Engagement */}
+      <div className="wwd-section matchday" data-aos="fade-right">
+        <h2>Live Matchday Buzz</h2>
+        <p>
+          Whether at the stadium or from home, we keep the spirit high with real-time updates, reactions, and live discussions. Our digital fanwalls and chatrooms ignite the thrill of the game, uniting voices across the world.
+        </p>
+      </div>
+
+      {/* Section 3: Creative Campaigns */}
+      <div className="wwd-section campaigns" data-aos="fade-left">
+        <h2>Creative Fan Campaigns</h2>
+        <p>
+          From jersey days and themed hashtags to online challenges and fan-made videos, our campaigns echo our loyalty and creativity. We don’t just support the team — we amplify its legacy through our actions.
+        </p>
+      </div>
+
+      {/* Section 4: Community Connect */}
+      <div className="wwd-section community" data-aos="zoom-in-up">
+        <h2>Community Building</h2>
+        <p>
+          We host fan meetups, watch parties, and charitable drives under the banner of cricket. The Orange Army isn't just a fandom — it's a family. And every new member strengthens our bond.
+        </p>
+      </div>
+
+      {/* Section 5: Player Appreciation */}
+      <div className="wwd-section players" data-aos="fade-up">
+        <h2>Player Tributes</h2>
+        <p>
+          We honor our heroes with fan-made posters, interviews, and birthday specials. We spotlight every performance and back our squad through highs and lows — because loyalty goes beyond the scoreboard.
+        </p>
+      </div>
+
     </section>
   );
-};
-
-export default WhatWedo;
+}
