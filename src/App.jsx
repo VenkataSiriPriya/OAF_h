@@ -18,6 +18,11 @@ import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
 import WhatWedo from "./pages/WhatWedo";
 import Quiz from "./pages/Quiz";
+import Login from "./auth/Login";
+import Register from "./auth/Register";
+import AdminLogin from "./Admin/AdminLogin";
+import AdminUsers from "./Admin/AdminUsers";
+
 
 
 const App = () => {
@@ -37,6 +42,11 @@ const App = () => {
           <Route path="/contact" element={<Contact />} />
           <Route path="/WhatWedo" element={<WhatWedo />} />
           <Route path="/quiz" element={<Quiz />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/adminlogin" element={<AdminLogin />} />
+           <Route path="/users" element={<AdminUsers />} />
+          
           {/* Auth Routes */}
           {/* <Route path="/login" element={<Login />} />*/}
         </Routes>

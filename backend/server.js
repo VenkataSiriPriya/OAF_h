@@ -47,6 +47,21 @@ ${message || 'N/A'}
   }
 });
 
+
+// 🔐 Admin Login Route
+const adminLoginRoute = require('./api/admin-login'); // ✅ points to your folder
+app.use('/api', adminLoginRoute);  
+
+const userLoginRoute = require('./api/user-login');
+app.use('/api', userLoginRoute);
+
+const getUsersRoute = require('./api/get-users');
+app.use('/api', getUsersRoute);
+
+const saveScoreRoute = require('./api/save-score');
+app.use('/api', saveScoreRoute);
+
+
 app.listen(PORT, () => {
   console.log(`✅ Server running on http://localhost:${PORT}`);
 });

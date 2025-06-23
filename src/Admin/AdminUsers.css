@@ -1,0 +1,58 @@
+.admin-users-container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #1a1a1a;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(255, 102, 0, 0.4);
+  color: #fff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.admin-users-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #ff6600; /* SRH Orange */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 2px solid #ff6600;
+  padding-bottom: 10px;
+}
+
+.users-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.users-table thead {
+  background-color: #ff6600; /* SRH Orange */
+  color: #000;
+}
+
+.users-table th,
+.users-table td {
+  padding: 14px 16px;
+  border: 1px solid #333;
+  text-align: left;
+}
+
+.users-table tr:nth-child(even) {
+  background-color: #2a2a2a;
+}
+
+.users-table tr:nth-child(odd) {
+  background-color: #1f1f1f;
+}
+
+.users-table tbody tr:hover {
+  background-color: #333;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.no-users {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 18px;
+  color: #ccc;
+}

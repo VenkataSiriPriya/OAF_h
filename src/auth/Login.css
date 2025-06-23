@@ -1,0 +1,70 @@
+/* Login.css - SRH Theme */
+.login-container {
+  background: linear-gradient(to right, #000000, #F26522);
+  color: #fff;
+  max-width: 400px;
+  margin: 80px auto;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(242, 101, 34, 0.6);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.login-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #FFD700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form input {
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.login-form button {
+  background-color: #D32F2F;
+  color: white;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.3s ease;
+}
+
+.login-form button:hover {
+  background-color: #ff0000;
+}
+
+.error {
+  color: #FFD700;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.register-link {
+  text-align: center;
+  margin-top: 20px;
+  color: #fff;
+}
+
+.register-link a {
+  color: #FFD700;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.register-link a:hover {
+  text-decoration: underline;
+}
