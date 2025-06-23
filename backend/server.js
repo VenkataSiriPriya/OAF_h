@@ -57,6 +57,13 @@ app.use('/api', require('./api/leaderboard'));
 app.use('/api', require('./api/adminUsers'));
 app.use('/api', require('./api/quiz-time'));
 
+// ✅ Serve frontend (Vite build output)
+const root = path.join(__dirname, '..', 'dist');
+app.use(express.static(root));
+
+app.get(/.*/, (req, res) => {
+  res.sendFile(path.join(root, 'index.html'));
+});
 
 // ✅ Start server
 app.listen(PORT, () => {
