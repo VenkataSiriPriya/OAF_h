@@ -52,7 +52,7 @@ ${message || 'N/A'}
 // ✅ Use your routes (make sure these route files are updated to use pg)
 app.use('/api', require('./api/admin-login'));     // PostgreSQL version
 app.use('/api', require('./api/user-login'));      // PostgreSQL version
-app.use('/api', require('./api/submitScore'));     // PostgreSQL version
+app.use('/api', require('./api/submitscore'));     // PostgreSQL version
 app.use('/api', require('./api/leaderboard'));     // PostgreSQL version
 app.use('/api', require('./api/adminUsers'));      // PostgreSQL version
 app.use('/api', require('./api/quiz-time'));       // PostgreSQL version
