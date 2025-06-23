@@ -1,18 +1,18 @@
 const express = require('express');
 const router = express.Router();
-const mysql = require('mysql2');
+const { Pool } = require('pg');
 require('dotenv').config();
 
-// MySQL connection
-const db = mysql.createConnection({
+const pool = new Pool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
+  port: process.env.DB_PORT || 5432,
 });
 
 // Route to get leaderboard (latest entry per user)
-router.get('/leaderboard', (req, res) => {
+router.get('/leaderboard', async (req, res) => {
   const query = `
     SELECT 
       u.username, 
@@ -30,14 +30,13 @@ router.get('/leaderboard', (req, res) => {
     ORDER BY l.score DESC, l.time_taken ASC;
   `;
 
-  db.query(query, (err, results) => {
-    if (err) {
-      console.error("Leaderboard DB Error:", err);
-      return res.status(500).json({ success: false, message: "Server error" });
-    }
-
-    res.status(200).json({ success: true, data: results });
-  });
+  try {
+    const { rows } = await pool.query(query);
+    res.status(200).json({ success: true, data: rows });
+  } catch (err) {
+    console.error("Leaderboard DB Error:", err);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
 });
 
 module.exports = router;

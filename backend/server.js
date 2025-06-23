@@ -49,13 +49,13 @@ ${message || 'N/A'}
   }
 });
 
-// ✅ Clean API Routes
-app.use('/api', require('./api/admin-login'));
-app.use('/api', require('./api/user-login'));
-app.use('/api', require('./api/submitscore'));
-app.use('/api', require('./api/leaderboard'));
-app.use('/api', require('./api/adminUsers'));
-app.use('/api', require('./api/quiz-time'));
+// ✅ Use your routes (make sure these route files are updated to use pg)
+app.use('/api', require('./api/admin-login'));     // PostgreSQL version
+app.use('/api', require('./api/user-login'));      // PostgreSQL version
+app.use('/api', require('./api/submitScore'));     // PostgreSQL version
+app.use('/api', require('./api/leaderboard'));     // PostgreSQL version
+app.use('/api', require('./api/adminUsers'));      // PostgreSQL version
+app.use('/api', require('./api/quiz-time'));       // PostgreSQL version
 
 // ✅ Serve frontend (Vite build output)
 const root = path.join(__dirname, '..', 'dist');

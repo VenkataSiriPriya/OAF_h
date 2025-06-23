@@ -1,60 +1,57 @@
 const express = require('express');
-const mysql = require('mysql2');
-const bcrypt = require('bcrypt');
 const router = express.Router();
+const bcrypt = require('bcrypt');
+const { Pool } = require('pg');
 require('dotenv').config(); // Load environment variables from .env
 
-// MySQL DB connection using env variables
-const db = mysql.createConnection({
+// PostgreSQL pool connection using env variables
+const pool = new Pool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
+  port: process.env.DB_PORT || 5432,
 });
 
 // ========================
-// Register a new user (unchanged)
+// Register a new user
 // ========================
 router.post('/register', async (req, res) => {
   const { username, email, password } = req.body;
 
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
-    const query = 'INSERT INTO users (username, email, password) VALUES (?, ?, ?)';
-    db.query(query, [username, email, hashedPassword], (err, results) => {
-      if (err) {
-        console.error(err);
-        if (err.code === 'ER_DUP_ENTRY') {
-          return res.status(400).json({ success: false, message: 'Email already registered' });
-        }
-        return res.status(500).json({ success: false, message: 'Database error' });
-      }
-      res.status(200).json({ success: true, message: 'User registered successfully' });
-    });
+    const query = `
+      INSERT INTO users (username, email, password) 
+      VALUES ($1, $2, $3)
+    `;
+    await pool.query(query, [username, email, hashedPassword]);
+    res.status(200).json({ success: true, message: 'User registered successfully' });
   } catch (error) {
-    console.error('Hashing error:', error);
-    res.status(500).json({ success: false, message: 'Internal server error' });
+    console.error('DB error:', error);
+    // Check for unique violation error (Postgres error code '23505')
+    if (error.code === '23505') {
+      return res.status(400).json({ success: false, message: 'Email or username already registered' });
+    }
+    res.status(500).json({ success: false, message: 'Database error' });
   }
 });
 
 // ========================
-// Login existing user (updated to use username)
+// Login existing user
 // ========================
-router.post('/login', (req, res) => {
+router.post('/login', async (req, res) => {
   const { username, password } = req.body;
 
-  const query = 'SELECT * FROM users WHERE username = ?';
-  db.query(query, [username], async (err, results) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).json({ success: false, message: 'Database error' });
-    }
+  try {
+    const query = 'SELECT * FROM users WHERE username = $1';
+    const result = await pool.query(query, [username]);
 
-    if (results.length === 0) {
+    if (result.rows.length === 0) {
       return res.status(400).json({ success: false, message: 'User not found' });
     }
 
-    const user = results[0];
+    const user = result.rows[0];
     const passwordMatch = await bcrypt.compare(password, user.password);
 
     if (!passwordMatch) {
@@ -62,7 +59,10 @@ router.post('/login', (req, res) => {
     }
 
     res.status(200).json({ success: true, username: user.username });
-  });
+  } catch (err) {
+    console.error('DB error:', err);
+    res.status(500).json({ success: false, message: 'Database error' });
+  }
 });
 
 module.exports = router;

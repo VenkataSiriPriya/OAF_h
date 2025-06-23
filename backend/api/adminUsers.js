@@ -1,18 +1,19 @@
 // api/adminUsers.js
 const express = require('express');
 const router = express.Router();
-const mysql = require('mysql2');
+const { Pool } = require('pg');
 require('dotenv').config();
 
-const db = mysql.createConnection({
+const pool = new Pool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
+  port: process.env.DB_PORT || 5432,
 });
 
 // Latest quiz per user with time taken
-router.get('/admin/users', (req, res) => {
+router.get('/admin/users', async (req, res) => {
   const query = `
     SELECT 
       u.username,
@@ -20,7 +21,7 @@ router.get('/admin/users', (req, res) => {
       q.played_at,
       q.started_at,
       q.completed_at,
-      TIMESTAMPDIFF(SECOND, q.started_at, q.completed_at) AS time_taken
+      EXTRACT(EPOCH FROM (q.completed_at - q.started_at)) AS time_taken
     FROM users u
     LEFT JOIN (
       SELECT qs1.*
@@ -34,14 +35,13 @@ router.get('/admin/users', (req, res) => {
     ORDER BY q.played_at DESC;
   `;
 
-  db.query(query, (err, results) => {
-    if (err) {
-      console.error("DB error:", err);
-      return res.status(500).json({ success: false, message: "Server error" });
-    }
-
-    res.status(200).json({ success: true, users: results });
-  });
+  try {
+    const { rows } = await pool.query(query);
+    res.status(200).json({ success: true, users: rows });
+  } catch (err) {
+    console.error("DB error:", err);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
 });
 
 module.exports = router;
