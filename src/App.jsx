@@ -21,6 +21,7 @@ import Register from "./auth/Register";
 import AdminLogin from "./Admin/AdminLogin";
 import AdminUsers from "./Admin/AdminUsers";
 import Leaderboard from "./components/sections/Leaderboard";
+import UpdateQuiz from "./Admin/UpdateQuiz";
 
 // 🔐 Route Guard
 const ProtectedAdminUsers = () => {
@@ -50,6 +51,7 @@ const App = () => {
           <Route path="/adminlogin" element={<AdminLogin />} />
           <Route path="/users" element={<ProtectedAdminUsers />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
+          <Route path="/updatequiz" element={<UpdateQuiz />} />
         </Routes>
       </main>
 

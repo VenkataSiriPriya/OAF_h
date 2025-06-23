@@ -1,14 +1,16 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
+const path = require('path');
 require('dotenv').config();
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
 
+// 📩 Email route
 app.post('/send-email', async (req, res) => {
   const { name, email, phone, company, service, message } = req.body;
 
@@ -47,24 +49,16 @@ ${message || 'N/A'}
   }
 });
 
-
-// 🔐 Admin Login Route
-const adminLoginRoute = require('./api/admin-login'); // ✅ points to your folder
-app.use('/api', adminLoginRoute);  
-
-const userLoginRoute = require('./api/user-login');
-app.use('/api', userLoginRoute);
-
-const saveScoreRoute = require('./api/submitscore');
-app.use('/api', saveScoreRoute);
-
-const leaderboardRoute = require('./api/leaderboard');
-app.use('/api', leaderboardRoute);
-
-const adminUsersRoute = require('./api/adminUsers');
-app.use('/api', adminUsersRoute);
+// ✅ Clean API Routes
+app.use('/api', require('./api/admin-login'));
+app.use('/api', require('./api/user-login'));
+app.use('/api', require('./api/submitscore'));
+app.use('/api', require('./api/leaderboard'));
+app.use('/api', require('./api/adminUsers'));
+app.use('/api', require('./api/quiz-time'));
 
 
+// ✅ Start server
 app.listen(PORT, () => {
   console.log(`✅ Server running on http://localhost:${PORT}`);
 });

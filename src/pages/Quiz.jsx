@@ -26,6 +26,7 @@ export default function Quiz() {
     },
   ];
 
+  // State variables
   const [started, setStarted] = useState(false);
   const [current, setCurrent] = useState(0);
   const [selected, setSelected] = useState("");
@@ -37,7 +38,11 @@ export default function Quiz() {
   const [timer, setTimer] = useState(0);
   const [intervalId, setIntervalId] = useState(null);
 
-  // Redirect unauthenticated users
+  const [isLocked, setIsLocked] = useState(true);
+  const [quizStartTime, setQuizStartTime] = useState(null);
+  const [countdown, setCountdown] = useState("");
+
+  // Auth check
   useEffect(() => {
     const isUser = localStorage.getItem("isUser") === "true";
     if (!isUser) {
@@ -45,6 +50,39 @@ export default function Quiz() {
       localStorage.setItem("redirectAfterLogin", "/quiz");
       window.location.href = "/login";
     }
+  }, []);
+
+  // Quiz unlock logic
+  useEffect(() => {
+    axios.get("http://localhost:5000/api/quiz-time")
+      .then((res) => {
+        if (res.data.success && res.data.start_time) {
+          const start = new Date(res.data.start_time);
+          setQuizStartTime(start);
+
+          const checkEligibility = () => {
+            const now = new Date();
+            if (now >= start) {
+              setIsLocked(false);
+              setCountdown("");
+            } else {
+              const diff = Math.floor((start - now) / 1000);
+              const mins = Math.floor(diff / 60);
+              const secs = diff % 60;
+              setCountdown(`Quiz unlocks in ${mins}m ${secs}s`);
+            }
+          };
+
+          checkEligibility();
+          const timer = setInterval(checkEligibility, 1000);
+          return () => clearInterval(timer);
+        } else {
+          setIsLocked(false); // fallback
+        }
+      })
+      .catch(() => {
+        setIsLocked(false); // fallback on error
+      });
   }, []);
 
   const formatTime = (seconds) => {
@@ -62,15 +100,13 @@ export default function Quiz() {
     setIntervalId(id);
   };
 
-  const handleOptionChange = (e) => {
-    setSelected(e.target.value);
-  };
+  const handleOptionChange = (e) => setSelected(e.target.value);
 
   const handleSubmit = () => {
     if (!selected) return;
     setShowAnswer(true);
     if (selected === questions[current].answer) {
-      setScore(score + 1);
+      setScore((prev) => prev + 1);
     }
   };
 
@@ -103,9 +139,9 @@ export default function Quiz() {
         started_at: startedAt,
         completed_at: completedAt,
       });
-      console.log("✅ Score and time saved");
+      console.log("✅ Score submitted");
     } catch (err) {
-      console.error("❌ Failed to save score:", err);
+      console.error("❌ Error saving score:", err);
     }
   };
 
@@ -120,9 +156,15 @@ export default function Quiz() {
             <li>⏱️ Timer will start when you begin</li>
             <li>💾 Your score and time will be saved</li>
           </ul>
-          <button className="start-button" onClick={startQuiz}>
+          <button
+            className="start-button"
+            onClick={startQuiz}
+            disabled={isLocked}
+            title={isLocked && quizStartTime ? `Quiz starts at ${quizStartTime.toLocaleString()}` : ""}
+          >
             Start Quiz
           </button>
+          {isLocked && countdown && <p className="countdown-msg">⏳ {countdown}</p>}
         </div>
       ) : !finished ? (
         <div>
@@ -152,9 +194,7 @@ export default function Quiz() {
               {selected === questions[current].answer ? (
                 <p className="correct">✅ Correct!</p>
               ) : (
-                <p className="incorrect">
-                  ❌ Incorrect. Correct answer: {questions[current].answer}
-                </p>
+                <p className="incorrect">❌ Correct answer: {questions[current].answer}</p>
               )}
               <button onClick={handleNext}>Next</button>
             </div>
