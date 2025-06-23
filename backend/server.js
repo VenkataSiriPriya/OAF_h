@@ -61,6 +61,9 @@ app.use('/api', getUsersRoute);
 const saveScoreRoute = require('./api/save-score');
 app.use('/api', saveScoreRoute);
 
+const leaderboardRoute = require('./api/leaderboard');
+app.use('/api', leaderboardRoute);
+
 
 app.listen(PORT, () => {
   console.log(`✅ Server running on http://localhost:${PORT}`);

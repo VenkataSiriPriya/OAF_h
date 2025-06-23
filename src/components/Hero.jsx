@@ -9,6 +9,7 @@ import Testimonals from "./sections/Testimonals";
 import SocialMedia from "./sections/SocialMedia";
 import FormModal from "./Modals/FormModal";
 import ContactSEC from "./sections/Contact";
+import Leaderboard from "./sections/Leaderboard";
 
 const Hero = () => {
   const [showModal, setShowModal] = useState(false);
@@ -67,6 +68,7 @@ const Hero = () => {
         <BrandingCards />
         <Services />
         <Testimonals />
+        <Leaderboard />
         <Contact />
         {/* <SocialMedia /> */}
         <ContactSEC />

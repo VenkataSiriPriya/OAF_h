@@ -1,58 +1,66 @@
+/* SRH Themed AdminUsers.css */
+
 .admin-users-container {
+  padding: 2rem;
   max-width: 1000px;
-  margin: 40px auto;
-  padding: 30px;
-  background: #1a1a1a;
+  margin: auto;
+  background-color: #0d0d0d; /* Dark background */
   border-radius: 12px;
-  box-shadow: 0 0 20px rgba(255, 102, 0, 0.4);
-  color: #fff;
+  box-shadow: 0 8px 20px rgba(255, 102, 0, 0.3);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #fff;
 }
 
 .admin-users-container h2 {
   text-align: center;
-  margin-bottom: 25px;
-  color: #ff6600; /* SRH Orange */
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  border-bottom: 2px solid #ff6600;
+  color: #ff9800; /* SRH Orange */
+  margin-bottom: 2rem;
+  border-bottom: 2px solid #ff9800;
   padding-bottom: 10px;
 }
 
-.users-table {
+.admin-users-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 10px;
+  background-color: #1a1a1a;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
-.users-table thead {
-  background-color: #ff6600; /* SRH Orange */
-  color: #000;
-}
-
-.users-table th,
-.users-table td {
-  padding: 14px 16px;
-  border: 1px solid #333;
+.admin-users-table th,
+.admin-users-table td {
+  padding: 1rem;
   text-align: left;
+  border-bottom: 1px solid #333;
 }
 
-.users-table tr:nth-child(even) {
-  background-color: #2a2a2a;
+.admin-users-table th {
+  background-color: #ff5722; /* Deep orange */
+  color: #fff;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.users-table tr:nth-child(odd) {
-  background-color: #1f1f1f;
+.admin-users-table tr:hover {
+  background-color: #333; /* Highlight row on hover */
 }
 
-.users-table tbody tr:hover {
-  background-color: #333;
-  transition: background-color 0.2s ease-in-out;
+.admin-users-table td {
+  color: #f0f0f0;
 }
 
-.no-users {
-  text-align: center;
-  margin-top: 30px;
-  font-size: 18px;
-  color: #ccc;
+@media (max-width: 768px) {
+  .admin-users-table {
+    font-size: 14px;
+  }
+
+  .admin-users-container {
+    padding: 1rem;
+  }
+
+  .admin-users-table th,
+  .admin-users-table td {
+    padding: 0.75rem;
+  }
 }

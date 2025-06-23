@@ -45,14 +45,18 @@ export default function Quiz() {
   const [startTime, setStartTime] = useState(null);
   const [endTime, setEndTime] = useState(null);
   const [timer, setTimer] = useState(0);
+  const [intervalId, setIntervalId] = useState(null);
 
   useEffect(() => {
     const now = new Date();
     setStartTime(now);
-    const interval = setInterval(() => {
+
+    const id = setInterval(() => {
       setTimer((prev) => prev + 1);
     }, 1000);
-    return () => clearInterval(interval);
+
+    setIntervalId(id);
+    return () => clearInterval(id);
   }, []);
 
   const formatTime = (seconds) => {
@@ -82,6 +86,7 @@ export default function Quiz() {
     } else {
       const end = new Date();
       setEndTime(end);
+      clearInterval(intervalId); // stop timer
       setFinished(true);
       submitScore(score, startTime, end);
     }
@@ -153,6 +158,8 @@ export default function Quiz() {
           <h3>🎉 Quiz Complete!</h3>
           <p>Your Score: {score} / {questions.length}</p>
           <p>Total Time Taken: {formatTime(timer)}</p>
+          <p>Started At: {startTime.toLocaleTimeString()}</p>
+          <p>Completed At: {endTime.toLocaleTimeString()}</p>
         </div>
       )}
     </div>

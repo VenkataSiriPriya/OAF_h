@@ -1,6 +1,5 @@
-// src/App.jsx
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from "react-router-dom";
 
 // Layout
 import Navbar from "./components/Navbar";
@@ -8,7 +7,6 @@ import Footer from "./components/Footer";
 import NotFound from "./components/NotFound";
 
 // Pages
-// import Hero from "./pages/Hero";
 import Hero from "./components/Hero";
 import About from "./pages/About";
 import Services from "./pages/Services";
@@ -22,8 +20,13 @@ import Login from "./auth/Login";
 import Register from "./auth/Register";
 import AdminLogin from "./Admin/AdminLogin";
 import AdminUsers from "./Admin/AdminUsers";
+import Leaderboard from "./components/sections/Leaderboard";
 
-
+// 🔐 Route Guard
+const ProtectedAdminUsers = () => {
+  const location = useLocation();
+  return location.state?.fromClick ? <AdminUsers /> : <Navigate to="/" replace />;
+};
 
 const App = () => {
   return (
@@ -45,10 +48,8 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/adminlogin" element={<AdminLogin />} />
-           <Route path="/users" element={<AdminUsers />} />
-          
-          {/* Auth Routes */}
-          {/* <Route path="/login" element={<Login />} />*/}
+          <Route path="/users" element={<ProtectedAdminUsers />} />
+          <Route path="/leaderboard" element={<Leaderboard />} />
         </Routes>
       </main>
 

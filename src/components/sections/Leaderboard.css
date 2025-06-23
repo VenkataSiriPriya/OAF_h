@@ -1,0 +1,46 @@
+/* src/pages/Leaderboard.css */
+
+.leaderboard-container {
+  padding: 2rem;
+  background: #0b0c10;
+  color: #f05a28; /* SRH Orange */
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.leaderboard-container h2 {
+  text-align: center;
+  color: #f05a28;
+  margin-bottom: 1.5rem;
+}
+
+.leaderboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #1f1f1f;
+  color: #fff;
+  box-shadow: 0 0 10px rgba(255, 94, 0, 0.3);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.leaderboard-table th, .leaderboard-table td {
+  padding: 1rem;
+  text-align: center;
+  border-bottom: 1px solid #333;
+}
+
+.leaderboard-table thead {
+  background-color: #f05a28;
+  color: #fff;
+}
+
+.leaderboard-table tr:hover {
+  background-color: rgba(255, 94, 0, 0.1);
+  transition: 0.3s;
+}
+
+.leaderboard-table td:nth-child(1) {
+  font-weight: bold;
+  color: gold;
+}

@@ -68,7 +68,12 @@ const Navbar = () => {
           {isAdmin ? (
             <>
               <li><Link to="/upgrade-quiz" onClick={handleLinkClick}>Upgrade Quiz</Link></li>
-              <li><Link to="/users" onClick={handleLinkClick}>Users</Link></li>
+             <li>
+  <Link to="/users" state={{ fromClick: true }} onClick={handleLinkClick}>
+    Users
+  </Link>
+</li>
+
               <li>
                 <Link to="/" onClick={() => { handleLinkClick(); handleLogout(); }}>Logout</Link>
               </li>

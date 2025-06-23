@@ -3,7 +3,7 @@ const router = express.Router();
 const mysql = require('mysql2');
 require('dotenv').config();
 
-// MySQL connection
+// Create MySQL connection
 const db = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -11,21 +11,26 @@ const db = mysql.createConnection({
   database: process.env.DB_NAME,
 });
 
-// Route to get all users and their quiz scores
-router.get('/admin/users', (req, res) => {
+// Get username, score, time_taken from users + leaderboard
+router.get('/api/users', (req, res) => {
   const query = `
-    SELECT u.username, q.score, q.played_at
+    SELECT u.username, l.score, l.time_taken
     FROM users u
-    LEFT JOIN quiz_scores q ON u.id = q.user_id
-    ORDER BY q.played_at DESC;
+    JOIN leaderboard l ON u.id = l.user_id
+    WHERE l.id IN (
+      SELECT MAX(id)
+      FROM leaderboard
+      GROUP BY user_id
+    )
+    ORDER BY l.score DESC
   `;
 
   db.query(query, (err, results) => {
     if (err) {
-      console.error("DB Error:", err);
-      return res.status(500).json({ success: false, message: "Server error" });
+      console.error("Error fetching users:", err);
+      return res.status(500).json({ message: 'Server error' });
     }
-    res.status(200).json({ success: true, users: results });
+    res.json(results);
   });
 });
 
