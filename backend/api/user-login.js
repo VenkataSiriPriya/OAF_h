@@ -1,17 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
-const { Pool } = require('pg');
-require('dotenv').config(); // Load environment variables from .env
 
-// PostgreSQL pool connection using env variables
-const pool = new Pool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-  port: process.env.DB_PORT || 5432,
-});
+require('dotenv').config(); // Load environment variables from .env
+const pool = require('../db');
+
+
+
 
 // ========================
 // Register a new user
