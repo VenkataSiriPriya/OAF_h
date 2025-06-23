@@ -8,7 +8,7 @@ const Leaderboard = () => {
   useEffect(() => {
     axios.get("http://localhost:5000/api/admin/users")
       .then((res) => {
-        if (res.data.success) {
+        if (res.data.success && res.data.users) {
           setUsers(res.data.users);
         }
       })
@@ -17,12 +17,17 @@ const Leaderboard = () => {
       });
   }, []);
 
-  // Sort by score descending, then by time_taken ascending
+  // Sort users by score DESC, then time_taken ASC
   const sortedUsers = [...users].sort((a, b) => {
-    if (b.score === a.score) {
-      return a.time_taken - b.time_taken;
+    const scoreA = a.score ?? 0;
+    const scoreB = b.score ?? 0;
+    const timeA = a.time_taken ?? Number.MAX_SAFE_INTEGER;
+    const timeB = b.time_taken ?? Number.MAX_SAFE_INTEGER;
+
+    if (scoreA === scoreB) {
+      return timeA - timeB; // Less time = higher rank
     }
-    return b.score - a.score;
+    return scoreB - scoreA; // Higher score = higher rank
   });
 
   return (
@@ -54,7 +59,9 @@ const Leaderboard = () => {
               </tr>
             ))
           ) : (
-            <tr><td colSpan="5">No data available</td></tr>
+            <tr>
+              <td colSpan="5">No data available</td>
+            </tr>
           )}
         </tbody>
       </table>

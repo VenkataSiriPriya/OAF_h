@@ -17,6 +17,20 @@ const AdminUsers = () => {
       });
   }, []);
 
+  // Helper to format datetime in IST
+  const formatIST = (datetimeStr) => {
+    return new Date(datetimeStr).toLocaleString("en-IN", {
+      timeZone: "Asia/Kolkata",
+      hour12: true,
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    });
+  };
+
   return (
     <div className="admin-users-container">
       <h2>👨‍💼 Admin Panel - User Scores</h2>
@@ -36,7 +50,7 @@ const AdminUsers = () => {
                 <td>{user.username}</td>
                 <td>{user.score ?? "N/A"}</td>
                 <td>{user.time_taken ?? "N/A"}</td>
-                <td>{user.played_at ? new Date(user.played_at).toLocaleString() : "N/A"}</td>
+                <td>{user.played_at ? formatIST(user.played_at) : "N/A"}</td>
               </tr>
             ))
           ) : (

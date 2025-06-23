@@ -55,14 +55,14 @@ app.use('/api', adminLoginRoute);
 const userLoginRoute = require('./api/user-login');
 app.use('/api', userLoginRoute);
 
-const getUsersRoute = require('./api/get-users');
-app.use('/api', getUsersRoute);
-
-const saveScoreRoute = require('./api/save-score');
+const saveScoreRoute = require('./api/submitscore');
 app.use('/api', saveScoreRoute);
 
 const leaderboardRoute = require('./api/leaderboard');
 app.use('/api', leaderboardRoute);
+
+const adminUsersRoute = require('./api/adminUsers');
+app.use('/api', adminUsersRoute);
 
 
 app.listen(PORT, () => {

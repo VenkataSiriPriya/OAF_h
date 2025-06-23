@@ -11,7 +11,7 @@ const db = mysql.createConnection({
   database: process.env.DB_NAME,
 });
 
-// Route to get leaderboard
+// Route to get leaderboard (latest entry per user)
 router.get('/leaderboard', (req, res) => {
   const query = `
     SELECT 
@@ -22,6 +22,11 @@ router.get('/leaderboard', (req, res) => {
       l.time_taken
     FROM leaderboard l
     JOIN users u ON l.user_id = u.id
+    INNER JOIN (
+      SELECT user_id, MAX(id) AS latest_id
+      FROM leaderboard
+      GROUP BY user_id
+    ) latest ON latest.latest_id = l.id
     ORDER BY l.score DESC, l.time_taken ASC;
   `;
 

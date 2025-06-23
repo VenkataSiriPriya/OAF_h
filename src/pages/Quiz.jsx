@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "../pages/styles/Quiz.css";
+import "./styles/Quiz.css";
 
 export default function Quiz() {
   const questions = [
@@ -24,45 +24,42 @@ export default function Quiz() {
       ],
       answer: "Rajiv Gandhi International Cricket Stadium",
     },
-    {
-      question: "Which bowler has taken the most wickets for SRH?",
-      options: ["Rashid Khan", "Bhuvneshwar Kumar", "T. Natarajan", "Dale Steyn"],
-      answer: "Bhuvneshwar Kumar",
-    },
-    {
-      question: "Who is the current head coach of SRH (as of IPL 2024)?",
-      options: ["Tom Moody", "Brian Lara", "Daniel Vettori", "Stephen Fleming"],
-      answer: "Daniel Vettori",
-    },
   ];
 
+  const [started, setStarted] = useState(false);
   const [current, setCurrent] = useState(0);
   const [selected, setSelected] = useState("");
   const [showAnswer, setShowAnswer] = useState(false);
   const [score, setScore] = useState(0);
   const [finished, setFinished] = useState(false);
-
   const [startTime, setStartTime] = useState(null);
   const [endTime, setEndTime] = useState(null);
   const [timer, setTimer] = useState(0);
   const [intervalId, setIntervalId] = useState(null);
 
+  // Redirect unauthenticated users
   useEffect(() => {
-    const now = new Date();
-    setStartTime(now);
-
-    const id = setInterval(() => {
-      setTimer((prev) => prev + 1);
-    }, 1000);
-
-    setIntervalId(id);
-    return () => clearInterval(id);
+    const isUser = localStorage.getItem("isUser") === "true";
+    if (!isUser) {
+      alert("⚠️ Please login first to access the quiz!");
+      localStorage.setItem("redirectAfterLogin", "/quiz");
+      window.location.href = "/login";
+    }
   }, []);
 
   const formatTime = (seconds) => {
     const min = Math.floor(seconds / 60);
     const sec = seconds % 60;
     return `${min.toString().padStart(2, "0")}:${sec.toString().padStart(2, "0")}`;
+  };
+
+  const startQuiz = () => {
+    setStarted(true);
+    const now = new Date();
+    setStartTime(now);
+
+    const id = setInterval(() => setTimer((prev) => prev + 1), 1000);
+    setIntervalId(id);
   };
 
   const handleOptionChange = (e) => {
@@ -86,7 +83,7 @@ export default function Quiz() {
     } else {
       const end = new Date();
       setEndTime(end);
-      clearInterval(intervalId); // stop timer
+      clearInterval(intervalId);
       setFinished(true);
       submitScore(score, startTime, end);
     }
@@ -114,12 +111,22 @@ export default function Quiz() {
 
   return (
     <div className="quiz-container">
-      <h2>🏏 SRH Quiz</h2>
-      <p className="quiz-timer">⏱️ Time: {formatTime(timer)}</p>
-
-      {!finished ? (
+      {!started ? (
+        <div className="quiz-intro">
+          <h2>🏏 SRH Quiz Challenge</h2>
+          <p>Welcome to the official Sunrisers Hyderabad fan quiz!</p>
+          <ul>
+            <li>🔥 3 exciting SRH questions</li>
+            <li>⏱️ Timer will start when you begin</li>
+            <li>💾 Your score and time will be saved</li>
+          </ul>
+          <button className="start-button" onClick={startQuiz}>
+            Start Quiz
+          </button>
+        </div>
+      ) : !finished ? (
         <div>
-          <h4>Q{current + 1}. {questions[current].question}</h4>
+          <h2>Q{current + 1}. {questions[current].question}</h2>
           <form>
             {questions[current].options.map((option, index) => (
               <div key={index}>
@@ -152,14 +159,15 @@ export default function Quiz() {
               <button onClick={handleNext}>Next</button>
             </div>
           )}
+
+          <p className="quiz-timer">⏱️ Time: {formatTime(timer)}</p>
         </div>
       ) : (
-        <div>
+        <div className="quiz-results">
           <h3>🎉 Quiz Complete!</h3>
-          <p>Your Score: {score} / {questions.length}</p>
-          <p>Total Time Taken: {formatTime(timer)}</p>
-          <p>Started At: {startTime.toLocaleTimeString()}</p>
-          <p>Completed At: {endTime.toLocaleTimeString()}</p>
+          <p>✅ Score: {score} / {questions.length}</p>
+          <p>⏱️ Time Taken: {formatTime(timer)}</p>
+          <p>📅 Played At: {startTime?.toLocaleString()}</p>
         </div>
       )}
     </div>
