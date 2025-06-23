@@ -8,7 +8,8 @@ export default function UpdateQuiz() {
 
   // Fetch current quiz time
   useEffect(() => {
-    axios.get("http://localhost:5000/api/quiz-time")
+    axios.get("https://oaf-h-deployment-render-express.onrender.com/api/quiz-time")
+
       .then((res) => {
         if (res.data.success && res.data.start_time) {
           setStartTime(res.data.start_time.slice(0, 16)); // format for input

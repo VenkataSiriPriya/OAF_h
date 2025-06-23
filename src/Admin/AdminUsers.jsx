@@ -6,7 +6,8 @@ const AdminUsers = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/admin/users")
+    axios.get("https://oaf-h-deployment-render-express.onrender.com/api/admin/users")
+
       .then((res) => {
         if (res.data.success) {
           setUsers(res.data.users);

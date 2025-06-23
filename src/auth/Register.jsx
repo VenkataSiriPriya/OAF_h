@@ -17,7 +17,8 @@ export default function Register() {
     setErrorMsg('');
 
     try {
-      const res = await axios.post('http://localhost:5000/api/register', form);
+      const res = await axios.post('https://oaf-h-deployment-render-express.onrender.com/api/register', form);
+
       if (res.data.success) {
         navigate('/login'); // Redirect to login after success
       } else {
