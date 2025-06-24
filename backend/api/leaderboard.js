@@ -1,7 +1,5 @@
 const express = require('express');
 const router = express.Router();
-
-require('dotenv').config();
 const pool = require('../db');
 
 // Route to get leaderboard (latest entry per user)
@@ -9,18 +7,18 @@ router.get('/leaderboard', async (req, res) => {
   const query = `
     SELECT 
       u.username, 
-      l.score, 
-      l.started_at, 
-      l.completed_at,
-      l.time_taken
-    FROM leaderboard l
-    JOIN users u ON l.user_id = u.id
+      q.score, 
+      q.started_at, 
+      q.completed_at,
+      EXTRACT(EPOCH FROM (q.completed_at - q.started_at)) AS time_taken
+    FROM quiz_scores q
+    JOIN users u ON q.user_id = u.id
     INNER JOIN (
-      SELECT user_id, MAX(id) AS latest_id
-      FROM leaderboard
+      SELECT user_id, MAX(played_at) AS latest_play
+      FROM quiz_scores
       GROUP BY user_id
-    ) latest ON latest.latest_id = l.id
-    ORDER BY l.score DESC, l.time_taken ASC;
+    ) latest ON latest.user_id = q.user_id AND latest.latest_play = q.played_at
+    ORDER BY q.score DESC, time_taken ASC;
   `;
 
   try {
