@@ -26,7 +26,7 @@ export default function Login() {
     setErrorMsg('');
 
     try {
-      const res = await axios.post('https://oaf-h-deployment-render-express.onrender.com/api/login', form);
+      const res = await axios.post('https://oaf-h-deployment-render-express.onrender.com/api/user-login', form);
 
       if (res.data.success) {
         localStorage.setItem('user', res.data.username);
