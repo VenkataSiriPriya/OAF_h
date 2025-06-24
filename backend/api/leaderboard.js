@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const pool = require('../db');
+const pool = require('../db'); // PostgreSQL pool connection
 
-// Route to get leaderboard (latest entry per user)
+// GET /api/leaderboard
 router.get('/leaderboard', async (req, res) => {
   const query = `
     SELECT 
@@ -26,7 +26,11 @@ router.get('/leaderboard', async (req, res) => {
     res.status(200).json({ success: true, data: rows });
   } catch (err) {
     console.error("Leaderboard DB Error:", err);
-    res.status(500).json({ success: false, message: "Server error" });
+    res.status(500).json({
+      success: false,
+      message: "Server error",
+      error: err.message // Show exact DB error
+    });
   }
 });
 
