@@ -6,10 +6,13 @@ const Leaderboard = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/admin/users")
+    axios
+      .get("https://oaf-h-deployment-render-express.onrender.com/api/admin/users")
       .then((res) => {
         if (res.data.success && res.data.users) {
-          setUsers(res.data.users);
+          // Filter users who have played the quiz (i.e., have a valid played_at timestamp)
+          const playedUsers = res.data.users.filter(user => user.played_at !== null);
+          setUsers(playedUsers);
         }
       })
       .catch((err) => {
@@ -17,7 +20,7 @@ const Leaderboard = () => {
       });
   }, []);
 
-  // Sort users by score DESC, then time_taken ASC
+  // Sort users by score (DESC), then time taken (ASC)
   const sortedUsers = [...users].sort((a, b) => {
     const scoreA = a.score ?? 0;
     const scoreB = b.score ?? 0;
@@ -25,9 +28,9 @@ const Leaderboard = () => {
     const timeB = b.time_taken ?? Number.MAX_SAFE_INTEGER;
 
     if (scoreA === scoreB) {
-      return timeA - timeB; // Less time = higher rank
+      return timeA - timeB; // Less time = better rank
     }
-    return scoreB - scoreA; // Higher score = higher rank
+    return scoreB - scoreA; // Higher score = better rank
   });
 
   return (
@@ -50,17 +53,13 @@ const Leaderboard = () => {
                 <td>{index + 1}</td>
                 <td>{user.username}</td>
                 <td>{user.score ?? "N/A"}</td>
-                <td>{user.time_taken ?? "N/A"}</td>
-                <td>
-                  {user.played_at
-                    ? new Date(user.played_at).toLocaleString()
-                    : "N/A"}
-                </td>
+                <td>{user.time_taken !== null ? Math.round(user.time_taken) : "N/A"}</td>
+                <td>{new Date(user.played_at).toLocaleString()}</td>
               </tr>
             ))
           ) : (
             <tr>
-              <td colSpan="5">No data available</td>
+              <td colSpan="5">No one has played the quiz yet.</td>
             </tr>
           )}
         </tbody>

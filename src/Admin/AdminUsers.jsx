@@ -5,9 +5,10 @@ import "./AdminUsers.css";
 const AdminUsers = () => {
   const [users, setUsers] = useState([]);
 
-  useEffect(() => {
-    axios.get("https://oaf-h-deployment-render-express.onrender.com/api/admin/users")
-
+  // ✅ Fetch users
+  const fetchUsers = () => {
+    axios
+      .get("https://oaf-h-deployment-render-express.onrender.com/api/admin/users")
       .then((res) => {
         if (res.data.success) {
           setUsers(res.data.users);
@@ -16,9 +17,13 @@ const AdminUsers = () => {
       .catch((err) => {
         console.error("Failed to fetch users:", err);
       });
+  };
+
+  useEffect(() => {
+    fetchUsers();
   }, []);
 
-  // Helper to format datetime in IST
+  // ✅ Format datetime in IST
   const formatIST = (datetimeStr) => {
     return new Date(datetimeStr).toLocaleString("en-IN", {
       timeZone: "Asia/Kolkata",
@@ -32,6 +37,26 @@ const AdminUsers = () => {
     });
   };
 
+  // ✅ Delete user
+  const deleteUser = async (username) => {
+    if (!window.confirm(`Are you sure you want to delete ${username}?`)) return;
+
+    try {
+      const res = await axios.delete(
+        `https://oaf-h-deployment-render-express.onrender.com/api/admin/users/${username}`
+      );
+      if (res.data.success) {
+        alert(`Deleted user: ${username}`);
+        fetchUsers(); // Refresh list
+      } else {
+        alert(`Failed to delete: ${res.data.message}`);
+      }
+    } catch (err) {
+      console.error("Delete error:", err);
+      alert("An error occurred while deleting the user.");
+    }
+  };
+
   return (
     <div className="admin-users-container">
       <h2>👨‍💼 Admin Panel - User Scores</h2>
@@ -42,6 +67,7 @@ const AdminUsers = () => {
             <th>Score</th>
             <th>Time Taken (s)</th>
             <th>Played At</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -52,10 +78,18 @@ const AdminUsers = () => {
                 <td>{user.score ?? "N/A"}</td>
                 <td>{user.time_taken ?? "N/A"}</td>
                 <td>{user.played_at ? formatIST(user.played_at) : "N/A"}</td>
+                <td>
+                  <button
+                    onClick={() => deleteUser(user.username)}
+                    style={{ background: "#e74c3c", color: "white", border: "none", padding: "5px 10px", borderRadius: "4px", cursor: "pointer" }}
+                  >
+                    Delete
+                  </button>
+                </td>
               </tr>
             ))
           ) : (
-            <tr><td colSpan="4">No user data available</td></tr>
+            <tr><td colSpan="5">No user data available</td></tr>
           )}
         </tbody>
       </table>
