@@ -67,7 +67,12 @@ const Navbar = () => {
         <ul className={`navbar-links ${menuOpen ? "active" : ""}`}>
           {isAdmin ? (
             <>
-              <li><Link to="/updatequiz" onClick={handleLinkClick}>Update Quiz</Link></li>
+              <li>
+  <Link to="/updatequiz" state={{ fromClick: true }} onClick={handleLinkClick}>
+    Update Quiz
+  </Link>
+</li>
+
              <li>
   <Link to="/users" state={{ fromClick: true }} onClick={handleLinkClick}>
     Users

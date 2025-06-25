@@ -29,6 +29,14 @@ const ProtectedAdminUsers = () => {
   return location.state?.fromClick ? <AdminUsers /> : <Navigate to="/" replace />;
 };
 
+const ProtectedUpdateQuiz = () => {
+  const location = useLocation();
+  return location.state?.fromClick ? <UpdateQuiz /> : <Navigate to="/" replace />;
+};
+
+
+
+
 const App = () => {
   return (
     <Router>
@@ -51,7 +59,8 @@ const App = () => {
           <Route path="/adminlogin" element={<AdminLogin />} />
           <Route path="/users" element={<ProtectedAdminUsers />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
-          <Route path="/updatequiz" element={<UpdateQuiz />} />
+          <Route path="/updatequiz" element={<ProtectedUpdateQuiz />} />
+
         </Routes>
       </main>
 

@@ -1,4 +1,3 @@
-// frontend/components/Quiz.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './styles/Quiz.css';
@@ -49,12 +48,12 @@ export default function Quiz() {
     }
   }, []);
 
-  // Fetch quiz start time (already in correct format)
+  // Fetch quiz start time
   useEffect(() => {
     axios.get('https://oaf-h-deployment-render-express.onrender.com/api/quiz-time')
       .then(res => {
         if (res.data.success && res.data.start_time) {
-          setQuizStartTime(res.data.start_time); // 'YYYY-MM-DDTHH:mm'
+          setQuizStartTime(res.data.start_time); // Format: 'YYYY-MM-DDTHH:mm'
         }
       })
       .catch(err => console.error("Error fetching quiz time:", err));
@@ -64,19 +63,19 @@ export default function Quiz() {
   useEffect(() => {
     if (!quizStartTime) return;
 
+    const quizTime = new Date(quizStartTime);
     const interval = setInterval(() => {
       const now = new Date();
-      const quizTime = new Date(quizStartTime);
+      const diff = Math.floor((quizTime - now) / 1000);
 
-      if (now >= quizTime) {
+      if (diff <= 0) {
         setCanStart(true);
-        setCountdown('');
+        setCountdown("✅ You can start your quiz now!");
         clearInterval(interval);
       } else {
-        const diff = Math.floor((quizTime - now) / 1000);
         const min = Math.floor(diff / 60);
         const sec = diff % 60;
-        setCountdown(`${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`);
+        setCountdown(`⏳ Unlocks in: ${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`);
       }
     }, 1000);
 
@@ -160,9 +159,7 @@ export default function Quiz() {
               })}
             </p>
           )}
-          {!canStart && countdown && (
-            <p>⏳ Unlocks in: {countdown}</p>
-          )}
+          {countdown && <p>{countdown}</p>}
           <button className="start-button" onClick={startQuiz} disabled={!canStart}>
             Start Quiz
           </button>
@@ -189,7 +186,9 @@ export default function Quiz() {
           ) : (
             <>
               <p className={selected === questions[current].answer ? "correct" : "incorrect"}>
-                {selected === questions[current].answer ? "✅ Correct!" : `❌ Correct: ${questions[current].answer}`}
+                {selected === questions[current].answer
+                  ? "✅ Correct!"
+                  : `❌ Correct: ${questions[current].answer}`}
               </p>
               <button onClick={handleNext}>Next</button>
             </>
