@@ -1,3 +1,4 @@
+// frontend/components/Quiz.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './styles/Quiz.css';
@@ -13,6 +14,8 @@ export default function Quiz() {
   const [intervalId, setIntervalId] = useState(null);
   const [startTime, setStartTime] = useState(null);
   const [quizStartTime, setQuizStartTime] = useState('');
+  const [canStart, setCanStart] = useState(false);
+  const [countdown, setCountdown] = useState('');
 
   const questions = [
     {
@@ -46,15 +49,43 @@ export default function Quiz() {
     }
   }, []);
 
+  // Fetch quiz start time (already in correct format)
   useEffect(() => {
     axios.get('https://oaf-h-deployment-render-express.onrender.com/api/quiz-time')
       .then(res => {
         if (res.data.success && res.data.start_time) {
-          const startTimeStr = res.data.start_time.replace(' ', 'T');
-          setQuizStartTime(startTimeStr);
+          setQuizStartTime(res.data.start_time); // 'YYYY-MM-DDTHH:mm'
         }
-      });
+      })
+      .catch(err => console.error("Error fetching quiz time:", err));
   }, []);
+
+  // Countdown logic
+  useEffect(() => {
+    if (!quizStartTime) return;
+
+    const interval = setInterval(() => {
+      const now = new Date();
+      const quizTime = new Date(quizStartTime);
+
+      if (now >= quizTime) {
+        setCanStart(true);
+        setCountdown('');
+        clearInterval(interval);
+      } else {
+        const diff = Math.floor((quizTime - now) / 1000);
+        const min = Math.floor(diff / 60);
+        const sec = diff % 60;
+        setCountdown(`${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`);
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [quizStartTime]);
+
+  useEffect(() => {
+    return () => clearInterval(intervalId);
+  }, [intervalId]);
 
   const formatTime = (seconds) => {
     const min = Math.floor(seconds / 60);
@@ -63,8 +94,10 @@ export default function Quiz() {
   };
 
   const startQuiz = () => {
+    if (started || !canStart) return;
     setStarted(true);
-    setStartTime(new Date());
+    const now = new Date();
+    setStartTime(now);
     const id = setInterval(() => setTimer(prev => prev + 1), 1000);
     setIntervalId(id);
   };
@@ -87,7 +120,8 @@ export default function Quiz() {
     } else {
       clearInterval(intervalId);
       setFinished(true);
-      submitScore(score, startTime, new Date());
+      const endTime = new Date();
+      submitScore(score, startTime, endTime);
     }
   };
 
@@ -115,7 +149,7 @@ export default function Quiz() {
           <p>⏱️ Timer starts when you begin</p>
           <p>💾 Your score & time will be saved</p>
           {quizStartTime && (
-            <p>🕒 Quiz was scheduled at:{" "}
+            <p>🕒 Scheduled at:{" "}
               {new Date(quizStartTime).toLocaleString("en-IN", {
                 day: "2-digit",
                 month: "short",
@@ -126,7 +160,10 @@ export default function Quiz() {
               })}
             </p>
           )}
-          <button className="start-button" onClick={startQuiz}>
+          {!canStart && countdown && (
+            <p>⏳ Unlocks in: {countdown}</p>
+          )}
+          <button className="start-button" onClick={startQuiz} disabled={!canStart}>
             Start Quiz
           </button>
         </div>

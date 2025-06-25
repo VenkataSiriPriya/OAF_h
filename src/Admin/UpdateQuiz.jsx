@@ -6,26 +6,37 @@ import './UpdateQuiz.css';
 export default function UpdateQuiz() {
   const [startTime, setStartTime] = useState('');
   const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     axios.get('https://oaf-h-deployment-render-express.onrender.com/api/quiz-time')
-      .then((res) => {
+      .then(res => {
         if (res.data.success && res.data.start_time) {
-          setStartTime(res.data.start_time.slice(0, 16)); // datetime-local format
+          const local = new Date(res.data.start_time);
+          const tzOffset = local.getTimezoneOffset() * 60000;
+          const localTime = new Date(local.getTime() - tzOffset).toISOString().slice(0, 16);
+          setStartTime(localTime);
         }
-      });
+      })
+      .catch(err => console.error("Error fetching quiz time:", err));
   }, []);
 
   const handleSave = async () => {
-    if (!startTime) return alert("⛔ Please pick a time.");
+    if (!startTime) return alert("⛔ Please select a time.");
+    if (new Date(startTime) < new Date()) return alert("⛔ Time must be in the future.");
 
+    setLoading(true);
     try {
+      const utcTime = new Date(startTime).toISOString(); // Save as UTC
       await axios.post('https://oaf-h-deployment-render-express.onrender.com/api/admin/quiz-time', {
-        start_time: startTime,
+        start_time: utcTime
       });
       setMessage("✅ Time saved successfully.");
-    } catch {
+    } catch (err) {
+      console.error("Failed to save time:", err);
       setMessage("❌ Failed to save time.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -38,7 +49,9 @@ export default function UpdateQuiz() {
         value={startTime}
         onChange={(e) => setStartTime(e.target.value)}
       />
-      <button onClick={handleSave}>Save</button>
+      <button onClick={handleSave} disabled={loading}>
+        {loading ? "Saving..." : "Save"}
+      </button>
       {message && <p>{message}</p>}
     </div>
   );
