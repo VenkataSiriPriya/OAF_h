@@ -20,7 +20,7 @@ export default function UpdateQuiz() {
   const handleSave = async () => {
     if (!startTime) return alert("Please select a start time.");
     try {
-      await axios.post("http://localhost:5000/api/admin/quiz-time", {
+      await axios.post("https://oaf-h-deployment-render-express.onrender.com/api/admin/quiz-time", {
         start_time: startTime
       });
       setMessage("✅ Quiz start time has been updated.");

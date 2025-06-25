@@ -54,7 +54,7 @@ export default function Quiz() {
 
   // Quiz unlock logic
   useEffect(() => {
-    axios.get("http://localhost:5000/api/quiz-time")
+    axios.get("https://oaf-h-deployment-render-express.onrender.com/api/quiz-time")
       .then((res) => {
         if (res.data.success && res.data.start_time) {
           const start = new Date(res.data.start_time);
@@ -133,7 +133,7 @@ export default function Quiz() {
     }
 
     try {
-      await axios.post("http://localhost:5000/api/submit-score", {
+      await axios.post("https://oaf-h-deployment-render-express.onrender.com/api/submit-score", {
         username,
         score: finalScore,
         started_at: startedAt,
