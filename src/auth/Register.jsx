@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 export default function Register() {
   const [form, setForm] = useState({ username: '', email: '', password: '' });
   const [errorMsg, setErrorMsg] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -15,6 +16,7 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMsg('');
+    setLoading(true);
 
     try {
       const res = await axios.post('https://oaf-h-deployment-render-express.onrender.com/api/register', form);
@@ -25,14 +27,23 @@ export default function Register() {
         setErrorMsg(res.data.message || 'Registration failed');
       }
     } catch (err) {
-      setErrorMsg('Error registering user.');
+      // Show specific backend message if available
+      if (err.response && err.response.data && err.response.data.message) {
+        setErrorMsg(err.response.data.message);
+      } else {
+        setErrorMsg('Error registering user.');
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="register-container">
       <h2>Register</h2>
+
       {errorMsg && <p className="error">{errorMsg}</p>}
+
       <form className="register-form" onSubmit={handleSubmit}>
         <input
           name="username"
@@ -58,8 +69,11 @@ export default function Register() {
           value={form.password}
           required
         />
-        <button type="submit">Register</button>
+        <button type="submit" disabled={loading}>
+          {loading ? 'Registering...' : 'Register'}
+        </button>
       </form>
+
       <p className="login-link">
         Already have an account? <a href="/login">Login</a>
       </p>
